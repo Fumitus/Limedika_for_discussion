@@ -15,7 +15,7 @@ class BaseTest(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         # Make sure database exists
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345@localhost:5432/test'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
         app.config['DEBUG'] = False
         app.config['PROPAGATE_EXCEPTIONS'] = True
         with app.app_context():
