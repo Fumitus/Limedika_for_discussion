@@ -1,5 +1,5 @@
-from app import app
-from db import db
+from Limedika_for_discussion.app import app
+from Limedika_for_discussion.db import db
 
 db.init_app(app)
 

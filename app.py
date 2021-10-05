@@ -35,7 +35,7 @@ def auth_error_handler(err):
 
 
 if __name__ == '__main__':
-    from db import db
+    from Limedika_for_discussion.db import db
 
     db.init_app(app)
 
