@@ -1,0 +1,899 @@
+{
+	"id": "ebb1871d-5205-43f7-a0d0-a63e060163f4",
+	"name": "User create strores and item",
+	"timestamp": "2021-10-07T08:58:15.814Z",
+	"collection_id": "17786625-63e8f09d-ec2b-41fd-905e-cd3b243b6d37",
+	"folder_id": "17786625-9c41e8e1-c9f9-4151-8f41-9a6ddf5f6bf1",
+	"environment_id": "41120ea4-3a06-4cc6-9646-058d036d1b39",
+	"totalPass": 76,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "2944b118-b9c4-4dab-9713-228eb447ecef",
+			"name": "/register Copy",
+			"url": "http://127.0.0.1:5000/register",
+			"time": 92,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"Response time is less than 200 ms": true,
+				"User created successfully": true,
+				"Content-type is present in response": true,
+				"Content-type is 'application/json": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 200 ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User created successfully": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is present in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				92
+			],
+			"allTests": [
+				{
+					"Response time is less than 200 ms": true,
+					"User created successfully": true,
+					"Content-type is present in response": true,
+					"Content-type is 'application/json": true
+				}
+			]
+		},
+		{
+			"id": "316e1104-a684-4eaf-a208-9d7007ebb69a",
+			"name": "/register duplicate Copy",
+			"url": "http://127.0.0.1:5000/register",
+			"time": 10,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Response time is less than 200 ms": true,
+				"User already exists": true,
+				"Content-type is present in response": true,
+				"Content-type is 'application/json": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 200 ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User already exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is present in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Response time is less than 200 ms": true,
+					"User already exists": true,
+					"Content-type is present in response": true,
+					"Content-type is 'application/json": true
+				}
+			]
+		},
+		{
+			"id": "b2942b20-990d-4d29-804d-b60469827059",
+			"name": "/auth Copy",
+			"url": "http://127.0.0.1:5000/auth",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Body contains access_token": true,
+				"Response time is less than 150ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body contains access_token": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Body contains access_token": true,
+					"Response time is less than 150ms": true
+				}
+			]
+		},
+		{
+			"id": "aed4b263-dc01-4cf2-b686-3624c3063d93",
+			"name": "/store/<store not found> Copy",
+			"url": "http://127.0.0.1:5000/store/test_store",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "NOT FOUND"
+			},
+			"tests": {
+				"Status code is 404": true,
+				"Response message is 'Store not found'": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response message is 'Store not found'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 404": true,
+					"Response message is 'Store not found'": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true
+				}
+			]
+		},
+		{
+			"id": "1cb04782-9efc-46e5-9137-c87b5e4133b7",
+			"name": "/store/<string:name> Copy",
+			"url": "http://127.0.0.1:5000/store/test_store",
+			"time": 24,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Correct Store name is returned.": true,
+				"Correct Store id is returned": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Store name is returned.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Store id is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Correct Store name is returned.": true,
+					"Correct Store id is returned": true
+				}
+			]
+		},
+		{
+			"id": "c1fae70c-abb1-4ca8-b0f3-e862d4436a22",
+			"name": "/store/<post duplicate> Copy",
+			"url": "http://127.0.0.1:5000/store/test_store",
+			"time": 10,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Response message is 'A store with name \"test_store\" already exists.'": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response message is 'A store with name \"test_store\" already exists.'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Response message is 'A store with name \"test_store\" already exists.'": true
+				}
+			]
+		},
+		{
+			"id": "992ea52c-5e50-42a8-aa0f-783677d32960",
+			"name": "/store/<store exists> Copy",
+			"url": "http://127.0.0.1:5000/store/test_store",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Correct Store id is returened": true,
+				"Correct Store name is returened": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Store id is returened": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Store name is returened": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Correct Store id is returened": true,
+					"Correct Store name is returened": true
+				}
+			]
+		},
+		{
+			"id": "891efc18-1d7c-4386-8d78-6bc5900b2f79",
+			"name": "/stores Copy",
+			"url": "http://127.0.0.1:5000/stores",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Response have 'stores' key.": true,
+				"Response have 'id' key.": true,
+				"Response have 'name' key.": true,
+				"Response have 'items' key.": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response have 'stores' key.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response have 'id' key.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response have 'name' key.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response have 'items' key.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Response have 'stores' key.": true,
+					"Response have 'id' key.": true,
+					"Response have 'name' key.": true,
+					"Response have 'items' key.": true
+				}
+			]
+		},
+		{
+			"id": "3ff5803f-c5cc-4149-ab36-3bd8a1083b3e",
+			"name": "/store/<string:name> Copy",
+			"url": "http://127.0.0.1:5000/store/test_store",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Store deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Store deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Store deleted": true
+				}
+			]
+		},
+		{
+			"id": "2b142cb1-236e-4849-aff5-142e3361fcee",
+			"name": "/item/<no_items_exist> Copy",
+			"url": "http://127.0.0.1:5000/item/new_item",
+			"time": 13,
+			"responseCode": {
+				"code": 404,
+				"name": "NOT FOUND"
+			},
+			"tests": {
+				"Status code is 404": true,
+				"Response message is 'Item not found'": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response message is 'Item not found'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status code is 404": true,
+					"Response message is 'Item not found'": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true
+				}
+			]
+		},
+		{
+			"id": "6c58d083-6640-4e03-8b18-585def4661da",
+			"name": "/item/<my_item> Copy",
+			"url": "http://127.0.0.1:5000/item/new_item",
+			"time": 21,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Correct Item name is returned.": true,
+				"Correct Item price is returned": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Item name is returned.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Item price is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Correct Item name is returned.": true,
+					"Correct Item price is returned": true
+				}
+			]
+		},
+		{
+			"id": "8804b65b-dd7a-475d-81bf-2ce2418ef0ef",
+			"name": "/item/<duplicate item> Copy",
+			"url": "http://127.0.0.1:5000/item/new_item",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Response message is 'An item with name 'new_item' already exists.'": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response message is 'An item with name 'new_item' already exists.'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Response message is 'An item with name 'new_item' already exists.'": true
+				}
+			]
+		},
+		{
+			"id": "73205517-4e18-47c2-8d71-9c2bb7ac327c",
+			"name": "/item/<my_item> Copy",
+			"url": "http://127.0.0.1:5000/item/new_item",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Item name is returned": true,
+				"Item price is returned": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Item name is returned": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Item price is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Item name is returned": true,
+					"Item price is returned": true
+				}
+			]
+		},
+		{
+			"id": "eb6071a2-48de-485b-9601-19c60bda9707",
+			"name": "/item/<new_item updated> Copy",
+			"url": "http://127.0.0.1:5000/item/new_item",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Correct Item name is returned.": true,
+				"Correct Item price is returned": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Item name is returned.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Item price is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Correct Item name is returned.": true,
+					"Correct Item price is returned": true
+				}
+			]
+		},
+		{
+			"id": "797c09d4-8167-4245-8214-c64b87a8154e",
+			"name": "/item/<new_item1 created with put method> Copy",
+			"url": "http://127.0.0.1:5000/item/new_item1",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Correct Item name is returned.": true,
+				"Correct Item price is returned": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Item name is returned.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct Item price is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Correct Item name is returned.": true,
+					"Correct Item price is returned": true
+				}
+			]
+		},
+		{
+			"id": "b6f151ed-ae84-4d9c-94f7-0f67d964b35c",
+			"name": "/item/<my_item> Copy 1",
+			"url": "http://127.0.0.1:5000/item/new_item",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Item deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Item deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Item deleted": true
+				}
+			]
+		},
+		{
+			"id": "34c8b57d-3465-4457-ab6c-a6cb6ddb2f99",
+			"name": "/items Copy",
+			"url": "http://127.0.0.1:5000/items",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Content-type is 'application/json": true,
+				"Response time is less than 150ms": true,
+				"Response have 'items' key": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-type is 'application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 150ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response have 'items' key": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Content-type is 'application/json": true,
+					"Response time is less than 150ms": true,
+					"Response have 'items' key": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 326,
+	"collection": {
+		"requests": [
+			{
+				"id": "2944b118-b9c4-4dab-9713-228eb447ecef",
+				"method": "POST"
+			},
+			{
+				"id": "316e1104-a684-4eaf-a208-9d7007ebb69a",
+				"method": "POST"
+			},
+			{
+				"id": "b2942b20-990d-4d29-804d-b60469827059",
+				"method": "POST"
+			},
+			{
+				"id": "aed4b263-dc01-4cf2-b686-3624c3063d93",
+				"method": "GET"
+			},
+			{
+				"id": "1cb04782-9efc-46e5-9137-c87b5e4133b7",
+				"method": "POST"
+			},
+			{
+				"id": "c1fae70c-abb1-4ca8-b0f3-e862d4436a22",
+				"method": "POST"
+			},
+			{
+				"id": "992ea52c-5e50-42a8-aa0f-783677d32960",
+				"method": "GET"
+			},
+			{
+				"id": "891efc18-1d7c-4386-8d78-6bc5900b2f79",
+				"method": "GET"
+			},
+			{
+				"id": "3ff5803f-c5cc-4149-ab36-3bd8a1083b3e",
+				"method": "DELETE"
+			},
+			{
+				"id": "2b142cb1-236e-4849-aff5-142e3361fcee",
+				"method": "GET"
+			},
+			{
+				"id": "6c58d083-6640-4e03-8b18-585def4661da",
+				"method": "POST"
+			},
+			{
+				"id": "8804b65b-dd7a-475d-81bf-2ce2418ef0ef",
+				"method": "POST"
+			},
+			{
+				"id": "73205517-4e18-47c2-8d71-9c2bb7ac327c",
+				"method": "GET"
+			},
+			{
+				"id": "eb6071a2-48de-485b-9601-19c60bda9707",
+				"method": "PUT"
+			},
+			{
+				"id": "797c09d4-8167-4245-8214-c64b87a8154e",
+				"method": "PUT"
+			},
+			{
+				"id": "b6f151ed-ae84-4d9c-94f7-0f67d964b35c",
+				"method": "DELETE"
+			},
+			{
+				"id": "34c8b57d-3465-4457-ab6c-a6cb6ddb2f99",
+				"method": "GET"
+			}
+		]
+	}
+}
