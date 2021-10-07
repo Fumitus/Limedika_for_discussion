@@ -13,7 +13,7 @@ class StoreTest(BaseTest):
 
                 self.assertEqual(201, response.status_code, 'Response code do not met specified one.')
                 self.assertIsNotNone(StoreModel.find_by_name('test_store'), 'Store was not saved to DB.')
-                self.assertDictEqual({'name': 'test_store', 'items': []}, json.loads(response.data))
+                self.assertDictEqual({'id': 1, 'name': 'test_store', 'items': []}, json.loads(response.data))
 
     def test_error_occur_creating_store(self):
         with patch('Limedika_for_discussion.models.store.StoreModel.save_to_db') as mocked_save_to_db:
@@ -66,7 +66,7 @@ class StoreTest(BaseTest):
 
                 self.assertEqual(200, response.status_code)
                 self.assertIsNotNone(StoreModel.find_by_name('test_store'))
-                self.assertDictEqual({'name': 'test_store', 'items': []}, json.loads(response.data))
+                self.assertDictEqual({'id': 1, 'name': 'test_store', 'items': []}, json.loads(response.data))
 
     def test_store_not_found(self):
         with self.app() as client:
@@ -87,7 +87,7 @@ class StoreTest(BaseTest):
                 response = client.get('/store/test_store')
 
                 self.assertEqual(200, response.status_code)
-                self.assertDictEqual({'name': 'test_store', 'items': [{'name': 'test_item', 'price': 19.99}]
+                self.assertDictEqual({'id': 1 ,'name': 'test_store', 'items': [{'name': 'test_item', 'price': 19.99}]
                                       }, json.loads(response.data))
 
     def test_store_list(self):
@@ -107,8 +107,8 @@ class StoreTest(BaseTest):
 
                 self.assertIsNotNone(StoreModel.find_by_name('test_store'))
                 self.assertIsNotNone(StoreModel.find_by_name('test_store_2'))
-                self.assertDictEqual(json.loads(response_2.data), {'stores': [{'name': 'test_store', 'items': []},
-                                                                              {'name': 'test_store_2', 'items': []}
+                self.assertDictEqual(json.loads(response_2.data), {'stores': [{'id': 1, 'name': 'test_store', 'items': []},
+                                                                              {'id': 2, 'name': 'test_store_2', 'items': []}
                                                                               ]
                                                                    }
                                      )
@@ -122,6 +122,6 @@ class StoreTest(BaseTest):
                 item.save_to_db()
 
                 response = client.get('/stores')
-                self.assertDictEqual(json.loads(response.data), {'stores': [{'name': 'test_store',
+                self.assertDictEqual(json.loads(response.data), {'stores': [{'id': 1, 'name': 'test_store',
                                                                              'items': [{'name': 'test_item',
                                                                                         'price': 19.99}]}]})
