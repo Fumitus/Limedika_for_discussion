@@ -1,0 +1,936 @@
+{
+	"info": {
+		"_postman_id": "fda9b4f4-2973-4beb-8421-5afac90e3851",
+		"name": "2_User create strores and item",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User create and auth",
+			"item": [
+				{
+					"name": "/register Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.clearEnvironmentVariable(\"access_token\")",
+									"",
+									"tests[\"Response time is less than 200 ms\"] = responseTime < 200;",
+									"",
+									"var jsnonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"User created successfully\"] = jsnonData.message === 'User was created successfully';",
+									"",
+									"tests[\"Content-type is present in response\"] = postman.getResponseHeader('Content-Type');",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"qwerty\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/register duplicate Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.clearEnvironmentVariable(\"access_token\")",
+									"",
+									"tests[\"Response time is less than 200 ms\"] = responseTime < 200;",
+									"",
+									"var jsnonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"User already exists\"] = jsnonData.message === 'A user already exists';",
+									"",
+									"tests[\"Content-type is present in response\"] = postman.getResponseHeader('Content-Type');",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"qwerty\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"tests[\"Body contains access_token\"] = responseBody.has(\"access_token\");",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"qwerty\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Store create check delete",
+			"item": [
+				{
+					"name": "/store/<store not found> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Response message is 'Store not found'\"] = jsonData.message === \"Store not found\"",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/store/test_store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"test_store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<string:name> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Correct Store name is returned.\"] = jsonData.name === \"test_store\"",
+									"tests[\"Correct Store id is returned\"] = jsonData.id === 1"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/store/test_store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"test_store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<post duplicate> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 400\"] = responseCode.code === 400;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Response message is 'A store with name \\\"test_store\\\" already exists.'\"] = jsonData.message === \"A store with name \\\"test_store\\\" already exists.\""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/store/test_store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"test_store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<store exists> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Correct Store id is returened\"] = jsonData.id === 1;",
+									"tests[\"Correct Store name is returened\"] = jsonData.name === \"test_store\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/store/test_store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"test_store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/stores Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Response have 'stores' key.\"] = responseBody.has(\"stores\")",
+									"tests[\"Response have 'id' key.\"] = responseBody.has(\"id\")",
+									"tests[\"Response have 'name' key.\"] = responseBody.has(\"name\")",
+									"tests[\"Response have 'items' key.\"] = responseBody.has(\"items\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<string:name> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsnonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Store deleted\"] = jsnonData.message === 'Store deleted';"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/store/test_store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"test_store"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item create update delete",
+			"item": [
+				{
+					"name": "/item/<no_items_exist> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Response message is 'Item not found'\"] = jsonData.message === \"Item not found\"",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/item/new_item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"new_item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<my_item> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Correct Item name is returned.\"] = jsonData.name === \"new_item\"",
+									"tests[\"Correct Item price is returned\"] = jsonData.price === 19.99"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 19.99,\n    \"store_id\": {{store_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/item/new_item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"new_item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<duplicate item> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 400\"] = responseCode.code === 400;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Response message is 'An item with name 'new_item' already exists.'\"] = jsonData.message === \"An item with name 'new_item' already exists.\""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 19.99,\n    \"store_id\": 1   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/item/new_item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"new_item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<my_item> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Item name is returned\"] = jsonData.name === \"new_item\"",
+									"tests[\"Item price is returned\"] = jsonData.price === 19.99",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/item/new_item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"new_item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<new_item updated> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Correct Item name is returned.\"] = jsonData.name === \"new_item\"",
+									"tests[\"Correct Item price is returned\"] = jsonData.price === 11.11"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 11.11,\n    \"store_id\": 1   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/item/new_item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"new_item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<new_item1 created with put method> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Correct Item name is returned.\"] = jsonData.name === \"new_item1\"",
+									"tests[\"Correct Item price is returned\"] = jsonData.price === 11.11"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 11.11,\n    \"store_id\": 1   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/item/new_item1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"new_item1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<my_item> Copy 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsnonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Item deleted\"] = jsnonData.message === 'Item deleted';"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 19.99,\n    \"store_id\": 1   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/item/new_item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"new_item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/items Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Content-type is 'application/json\"] = postman.getResponseHeader('Content-Type') === 'application/json';",
+									"",
+									"tests[\"Response time is less than 150ms\"] = responseTime < 150;",
+									"",
+									"var jsnonData = JSON.parse(responseBody)",
+									"",
+									"tests[\"Response have 'items' key\"] = responseBody.has(\"items\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
